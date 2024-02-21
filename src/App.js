@@ -1,12 +1,10 @@
-
-
-import { Counter } from './features/counter/Counter';
-import './App.css';
-import ProductList from './features/product-list/ProductList';
-import Home from './pages/Home';
-import Login from './features/auth/components/Login';
-import LoginPage from './pages/LogInPage';
-import SignUpPage from './pages/SignUpPage';
+import { Counter } from "./features/counter/Counter";
+import "./App.css";
+import ProductList from "./features/product-list/ProductList";
+import Home from "./pages/Home";
+import Login from "./features/auth/components/Login";
+import LoginPage from "./pages/LogInPage";
+import SignUpPage from "./pages/SignUpPage";
 
 import * as React from "react";
 import { createRoot } from "react-dom/client";
@@ -16,12 +14,13 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-import Cart from './features/cart/cart';
+import Cart from "./features/cart/Cart";
+import CartPage from "./pages/cartPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (<Home></Home>),
+    element: <Home></Home>,
   },
   {
     path: "/login",
@@ -33,17 +32,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/cart",
-    element: <Cart></Cart>,
+    element: <CartPage></CartPage>,
   },
 ]);
-
-
 
 function App() {
   return (
     <div className="App">
- <RouterProvider router={router} /></div>
- 
+      <RouterProvider router={router} />
+    </div>
   );
 }
 
