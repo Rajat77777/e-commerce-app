@@ -235,10 +235,17 @@ function CheckOut() {
                             {address.name}
                           </p>
                           <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                            {address.phone}
+                            {address.street}
+                          <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                            {address.pincode}
                           </p>
                         </div>
                       </div>
+                      <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+            <p className="text-sm leading-6 text-gray-900">{address.phone}</p>
+            <p className="text-sm leading-6 text-gray-900">{address.pincode}</p>
+
+</div>
                       
                       
                     </li>
