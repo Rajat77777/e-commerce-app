@@ -236,6 +236,7 @@ function CheckOut() {
                           </p>
                           <p className="mt-1 truncate text-xs leading-5 text-gray-500">
                             {address.street}
+                          </p>
                           <p className="mt-1 truncate text-xs leading-5 text-gray-500">
                             {address.pincode}
                           </p>
@@ -243,7 +244,7 @@ function CheckOut() {
                       </div>
                       <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
             <p className="text-sm leading-6 text-gray-900">{address.phone}</p>
-            <p className="text-sm leading-6 text-gray-900">{address.pincode}</p>
+            <p className="text-sm leading-6 text-gray-900">{address.city}</p>
 
 </div>
                       
