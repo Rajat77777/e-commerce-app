@@ -56,7 +56,7 @@ function CheckOut() {
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
         <div className="lg:col-span-3">
-          <form className="bg-white px-5">
+          <form className="bg-white px-5 mt-12">
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
                 <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -223,13 +223,18 @@ function CheckOut() {
                 <p className="mt-1 text-sm leading-6 text-gray-600">
                   Choose from Existing Address
                 </p>
-                <ul role="list" className="divide-y divide-gray-100">
+                <ul role="list">
                   {address.map((address) => (
                     <li
                       key={address.email}
-                      className="flex justify-between gap-x-6 py-5"
+                      className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200"
                     >
                       <div className="flex min-w-0 gap-x-4">
+                        <input
+                        name="address"
+                          type="radio"
+                          className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                        />
                         <div className="min-w-0 flex-auto">
                           <p className="text-sm font-semibold leading-6 text-gray-900">
                             {address.name}
@@ -243,12 +248,13 @@ function CheckOut() {
                         </div>
                       </div>
                       <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-            <p className="text-sm leading-6 text-gray-900">{address.phone}</p>
-            <p className="text-sm leading-6 text-gray-900">{address.city}</p>
-
-</div>
-                      
-                      
+                        <p className="text-sm leading-6 text-gray-900">
+                          {address.phone}
+                        </p>
+                        <p className="text-sm leading-6 text-gray-900">
+                          {address.city}
+                        </p>
+                      </div>
                     </li>
                   ))}
                 </ul>
