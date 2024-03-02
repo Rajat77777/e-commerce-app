@@ -17,6 +17,7 @@ import {
 import Cart from "./features/cart/Cart";
 import CartPage from "./pages/cartPage";
 import CheckOut from "./pages/CheckOut";
+import ProductDetails from "./features/product-list/components/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
     path: "/checkout",
     element: <CheckOut></CheckOut>,
+  },
+  {
+    path: "/product-details",
+    element: <ProductDetails></ProductDetails>,
   },
 ]);
 
