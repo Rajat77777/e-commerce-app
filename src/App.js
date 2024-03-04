@@ -18,6 +18,8 @@ import Cart from "./features/cart/Cart";
 import CartPage from "./pages/cartPage";
 import CheckOut from "./pages/CheckOut";
 import ProductDetails from "./features/product-list/components/ProductDetails";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
+
 
 const router = createBrowserRouter([
   {
@@ -42,7 +44,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/product-detail",
-    element: <ProductDetails></ProductDetails>,
+    element: <ProductDetailsPage></ProductDetailsPage>,
   },
 ]);
 
