@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { increment, fetchAllProductAsync, selectAllProducts, selectCount } from "./productListSlice";
@@ -651,6 +651,9 @@ export default function ProductList() {
   const dispatch = useDispatch();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const products =useSelector(selectAllProducts);
+  useEffect(()=>{
+    dispatch(fetchAllProductAsync)
+  },[dispatch]);
 
   return (
     <div>
