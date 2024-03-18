@@ -1,7 +1,13 @@
 import React, { useState, Fragment, useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { increment, fetchAllProductAsync, selectAllProducts, selectCount } from "./productListSlice";
+import {
+  increment,
+  fetchAllProductAsync,
+  selectAllProducts,
+  selectCount,
+  fetchAllProductsByFilterAsync,
+} from "./productListSlice";
 
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XMarkIcon, StarIcon } from "@heroicons/react/24/outline";
@@ -42,15 +48,15 @@ const filters = [
       { value: "purple", label: "Purple", checked: false },
     ],
   },
-  {  
+  {
     id: "category",
     name: "Category",
     options: [
-      { value: "new-arrivals", label: "New Arrivals", checked: false },
-      { value: "sale", label: "Sale", checked: false },
-      { value: "travel", label: "Travel", checked: true },
-      { value: "organization", label: "Organization", checked: false },
-      { value: "accessories", label: "Accessories", checked: false },
+      { value: "smartphones", label: "smartphones", checked: false },
+      { value: "laptops", label: "laptops", checked: false },
+      { value: "fragrances", label: "fragrances", checked: true },
+      { value: "skincare", label: "skincare", checked: false },
+      { value: "groceries", label: "groceries", checked: false },
     ],
   },
   {
@@ -650,10 +656,19 @@ const products = [
 export default function ProductList() {
   const dispatch = useDispatch();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const products =useSelector(selectAllProducts);
-  useEffect(()=>{
-    dispatch(fetchAllProductAsync)
-  },[dispatch]);
+  const products = useSelector(selectAllProducts);
+  const[filter,setFilter]=useState({});
+
+  const handleFilter = (e, section, option) => {
+    const newFilter={...filter,[section.id]:option.value};
+    setFilter(newFilter);
+
+    dispatch(fetchAllProductsByFilterAsync);
+    console.log(section.id, option.value);
+  };
+  useEffect(() => {
+    dispatch(fetchAllProductAsync);
+  }, [dispatch]);
 
   return (
     <div>
@@ -748,6 +763,9 @@ export default function ProductList() {
                                             defaultValue={option.value}
                                             type="checkbox"
                                             defaultChecked={option.checked}
+                                            onChange={(e) =>
+                                              handleFilter(e, section, option)
+                                            }
                                             className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                           />
                                           <label
@@ -919,7 +937,10 @@ export default function ProductList() {
                         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                           {products.map((product) => (
                             <Link to="/product-detail">
-                              <div key={product.id} className="group relative border-solid border-2 p-2 border-gray-200">
+                              <div
+                                key={product.id}
+                                className="group relative border-solid border-2 p-2 border-gray-200"
+                              >
                                 <div className=" min-h-60 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
                                   <img
                                     src={product.thumbnail}
@@ -946,19 +967,17 @@ export default function ProductList() {
                                     </p>
                                   </div>
                                   <div>
-                                    
-                                  <p className="text-sm block font-medium text-gray-900">
-                                    $
-                                    {Math.round(
-                                      product.price *
-                                        (1 - product.discountPercentage / 100)
-                                    )}
-                                  </p>
+                                    <p className="text-sm block font-medium text-gray-900">
+                                      $
+                                      {Math.round(
+                                        product.price *
+                                          (1 - product.discountPercentage / 100)
+                                      )}
+                                    </p>
                                     <p className="text-sm block line-through font-medium text-gray-900">
                                       ${product.price}
                                     </p>
                                   </div>
-
                                 </div>
                               </div>
                             </Link>
