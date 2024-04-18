@@ -659,6 +659,7 @@ export default function ProductList() {
 
 
   const handleFilter = (e, section, option) => {
+    console.log(option.checked);
     const newFilter = { ...filter, [section.id]: option.value };
     setFilter(newFilter);
 
@@ -768,7 +769,7 @@ export default function ProductList() {
                   <DesktopFilter handleFilter={handleFilter}></DesktopFilter>
                   {/* Product grid */}
                   <div className="lg:col-span-3">
-                    <ProductGrid></ProductGrid>
+                    <ProductGrid products={products}></ProductGrid>
                   </div>
                 </div>
               </section>
