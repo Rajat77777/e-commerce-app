@@ -665,14 +665,14 @@ export default function ProductList() {
     const newFilter = {...filter};
     if(e.target.checked){
       if(newFilter[section.id]){
-        newFilter[section.id].push(option.value)
+        newFilter[section.id].push(option.value);
       }else{
-        newFilter[section.id]=[];
+        newFilter[section.id]=[option.value];
       }
 
     }else{
        const index= newFilter[section.id].find(el=>el===option.value);
-       newFilter.splice(index,1);
+       newFilter[section.id].splice(index,1);
     }
 
     
