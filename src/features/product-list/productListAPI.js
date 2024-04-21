@@ -7,7 +7,7 @@ export function fetchAllProducts() {
   }
   );
 }
-export function fetchProductsByFilters(filter,sort) {
+export function fetchProductsByFilters(filter,sort,pagination) {
   let queryString='';
   for(let key in filter){
     const categoryValues = filter[key];
@@ -21,6 +21,11 @@ export function fetchProductsByFilters(filter,sort) {
   }
 
   for(let key in sort){
+    queryString+=`${key}=${sort[key]}&`
+
+
+  }
+  for(let key in pagination){
     queryString+=`${key}=${sort[key]}&`
 
 

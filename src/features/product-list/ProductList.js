@@ -18,6 +18,7 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
+import { ITEMS_PER_PAGE } from "../../app/constants";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
 
@@ -657,6 +658,8 @@ export default function ProductList() {
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
   const [mobileFiltersOpen,setMobileFiltersOpen]= useState(false);
+  const [page, setPage]= useState(1);
+  
 
 
   const handleFilter = (e, section, option) => {
