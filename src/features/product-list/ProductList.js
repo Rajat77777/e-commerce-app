@@ -660,6 +660,7 @@ export default function ProductList() {
   const [mobileFiltersOpen,setMobileFiltersOpen]= useState(false);
   const [page, setPage]= useState(1);
   
+  
 
 
   const handleFilter = (e, section, option) => {
@@ -694,9 +695,16 @@ export default function ProductList() {
 
 
   };
+  const handlePage = (e, page) => {
+    
+
+    setPage(page);
+
+
+  };
   useEffect(() => {
     dispatch(fetchAllProductsByFilterAsync({filter,sort}));
-  }, [dispatch,filter]);
+  }, [dispatch,filter,page]);
 
   return (
     <div>
