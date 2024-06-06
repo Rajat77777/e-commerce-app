@@ -8,6 +8,8 @@ import {
   selectCount,
   fetchAllProductsByFilterAsync,
   selectTotalItems,
+  selectBrands,
+  selectCategories,
 } from "./productListSlice";
 
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
@@ -35,43 +37,7 @@ const subCategories = [
   { name: "Hip Bags", href: "#" },
   { name: "Laptop Sleeves", href: "#" },
 ];
-const filters = [
-  {
-    id: "color",
-    name: "Color",
-    options: [
-      { value: "white", label: "White", checked: false },
-      { value: "beige", label: "Beige", checked: false },
-      { value: "blue", label: "Blue", checked: true },
-      { value: "brown", label: "Brown", checked: false },
-      { value: "green", label: "Green", checked: false },
-      { value: "purple", label: "Purple", checked: false },
-    ],
-  },
-  {
-    id: "category",
-    name: "Category",
-    options: [
-      { value: "smartphones", label: "smartphones", checked: false },
-      { value: "laptops", label: "laptops", checked: false },
-      { value: "fragrances", label: "fragrances", checked: true },
-      { value: "skincare", label: "skincare", checked: false },
-      { value: "groceries", label: "groceries", checked: false },
-    ],
-  },
-  {
-    id: "size",
-    name: "Size",
-    options: [
-      { value: "2l", label: "2L", checked: false },
-      { value: "6l", label: "6L", checked: false },
-      { value: "12l", label: "12L", checked: false },
-      { value: "18l", label: "18L", checked: false },
-      { value: "20l", label: "20L", checked: false },
-      { value: "40l", label: "40L", checked: true },
-    ],
-  },
-];
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -81,7 +47,46 @@ function classNames(...classes) {
 export default function ProductList() {
   const dispatch = useDispatch();
   const products = useSelector(selectAllProducts);
+  const brands = useSelector(selectBrands);
+  const categories= useSelector(selectCategories);
   const totalItems = useSelector(selectTotalItems);
+  const filters = [
+    {
+      id: "color",
+      name: "Color",
+      options: [
+        { value: "white", label: "White", checked: false },
+        { value: "beige", label: "Beige", checked: false },
+        { value: "blue", label: "Blue", checked: true },
+        { value: "brown", label: "Brown", checked: false },
+        { value: "green", label: "Green", checked: false },
+        { value: "purple", label: "Purple", checked: false },
+      ],
+    },
+    {
+      id: "category",
+      name: "Category",
+      options: [
+        { value: "smartphones", label: "smartphones", checked: false },
+        { value: "laptops", label: "laptops", checked: false },
+        { value: "fragrances", label: "fragrances", checked: true },
+        { value: "skincare", label: "skincare", checked: false },
+        { value: "groceries", label: "groceries", checked: false },
+      ],
+    },
+    {
+      id: "size",
+      name: "Size",
+      options: [
+        { value: "2l", label: "2L", checked: false },
+        { value: "6l", label: "6L", checked: false },
+        { value: "12l", label: "12L", checked: false },
+        { value: "18l", label: "18L", checked: false },
+        { value: "20l", label: "20L", checked: false },
+        { value: "40l", label: "40L", checked: true },
+      ],
+    },
+  ];
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
   const [mobileFiltersOpen,setMobileFiltersOpen]= useState(false);
@@ -150,7 +155,7 @@ export default function ProductList() {
       <div>
         <div className="bg-white">
           <div>
-            <MobileFilter handleFilter={handleFilter} mobileFiltersOpen={mobileFiltersOpen}  setMobileFiltersOpen={setMobileFiltersOpen}></MobileFilter>
+            <MobileFilter handleFilter={handleFilter} mobileFiltersOpen={mobileFiltersOpen}  setMobileFiltersOpen={setMobileFiltersOpen}filters={filter}></MobileFilter>
 
             <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
@@ -231,7 +236,7 @@ export default function ProductList() {
                 </h2>
 
                 <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-                  <DesktopFilter handleFilter={handleFilter}></DesktopFilter>
+                  <DesktopFilter handleFilter={handleFilter} filters={filter}></DesktopFilter>
                   {/* Product grid */}
                   <div className="lg:col-span-3">
                     <ProductGrid products={products}></ProductGrid>
@@ -250,7 +255,7 @@ export default function ProductList() {
   );
 }
 
-function MobileFilter({ mobileFiltersOpen, setMobileFiltersOpen,handleFilter }) {
+function MobileFilter({ mobileFiltersOpen, setMobileFiltersOpen,handleFilter,filters, }) {
   return (
     <Transition.Root show={mobileFiltersOpen} as={Fragment}>
       <Dialog
@@ -364,7 +369,7 @@ function MobileFilter({ mobileFiltersOpen, setMobileFiltersOpen,handleFilter }) 
   );
 }
 
-function DesktopFilter({handleFilter}) {
+function DesktopFilter({handleFilter,filters}) {
   return (
     <form className="hidden lg:block">
       {filters.map((section) => (

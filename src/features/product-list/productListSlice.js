@@ -1,8 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchAllProducts, fetchProductsByFilters } from "./productListAPI";
+import { fetchAllProducts, fetchProductsByFilters, fetchBrands,fetchCategories } from "./productListAPI";
 
 const initialState = {
   products: [],
+  brands:[],
+  categories:[],
   status: "idle",
   totalItems:0
 };
@@ -21,6 +23,21 @@ export const fetchAllProductsByFilterAsync = createAsyncThunk(
   async (filter) => {
     const response = await fetchProductsByFilters(filter);
     // The value we return becomes the `fulfilled` action payload
+    return response.data;
+  }
+);
+
+export const fetchBrandsAsync =createAsyncThunk(
+  'products/fetchBrands',
+  async()=>{
+    const response =await fetchBrands();
+    return response.data;
+  }
+);
+export const fetchCategoriesAsync =createAsyncThunk(
+  'products/fetchCategories',
+  async()=>{
+    const response =await fetchCategories();
     return response.data;
   }
 );
@@ -51,13 +68,28 @@ export const productSlice = createSlice({
         state.status = "idle";
         state.products = action.payload.products;
         state.totalItems = action.payload.totalItems;
-      });
+      })
+      .addCase(fetchBrandsAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchBrandsAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.brands = action.payload;
+      })
+      .addCase(fetchCategoriesAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchCategoriesAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.categories = action.payload;
+      })
   },
 });
 
 export const { increment } = productSlice.actions;
 
 export const selectAllProducts = (state) => state.product.products;
-export const selectTotalItems = (state) => state.product.totalItems;
+export const selectBrands = (state) => state.product.brands;
+export const selectCategories= (state) => state.product.categories;
 
 export default productSlice.reducer;
