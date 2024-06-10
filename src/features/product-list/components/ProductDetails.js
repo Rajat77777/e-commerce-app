@@ -61,7 +61,7 @@ export default function ProductDetails() {
 
   return (
     <div className="bg-white">
-      {product?<div className="pt-6">
+      {product &&( <div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
             {product.breadcrumbs && product.breadcrumbs.map((breadcrumb) => (
@@ -95,23 +95,23 @@ export default function ProductDetails() {
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
           <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
             <img
-              src={product.images[0].src}
-              alt={product.images[0].alt}
+              src={product.images[0]}
+              alt={product.title}
               className="h-full w-full object-cover object-center"
             />
           </div>
           <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
               <img
-                src={product.images[1].src}
-                alt={product.images[1].alt}
+                    src={product.images[1]}
+              alt={product.title}
                 className="h-full w-full object-cover object-center"
               />
             </div>
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
               <img
-                src={product.images[2].src}
-                alt={product.images[2].alt}
+                   src={product.images[2]}
+              alt={product.title}
                 className="h-full w-full object-cover object-center"
               />
             </div>
@@ -119,7 +119,7 @@ export default function ProductDetails() {
           <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
             <img
               src={product.images[3].src}
-              alt={product.images[3].alt}
+              alt={product.title}
               className="h-full w-full object-cover object-center"
             />
           </div>
@@ -298,7 +298,7 @@ export default function ProductDetails() {
           </div>
         </div>
       </div>
-    </div>:null}
+    </div>):null}
     </div>
   )
 }
