@@ -41,6 +41,13 @@ const sizes: [
   { name: 'XL', inStock: true },
   { name: '2XL', inStock: true },
   { name: '3XL', inStock: true },
+];
+
+const highlights= [
+  'Hand cut and dewn locally',
+  'Dyed with our proprietary colors',
+  'Pre-washed &pre-shrunk',
+  'Ultra-soft 100% cotton',
 ]
 
 
@@ -279,7 +286,7 @@ export default function ProductDetails() {
 
               <div className="mt-4">
                 <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                  {product.highlights && product.highlights.map((highlight) => (
+                  {highlights.map((highlight) => (
                     <li key={highlight} className="text-gray-400">
                       <span className="text-gray-600">{highlight}</span>
                     </li>

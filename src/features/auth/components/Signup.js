@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { increment, incrementAsync, selectCount } from "../AuthSlice";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+import { increment, incrementAsync } from "../AuthSlice";
 import { Link } from "react-router-dom";
 
 export default function Signup() {
-  const count = useSelector(selectCount);
   const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   return (
     <>
