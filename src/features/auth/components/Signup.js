@@ -14,6 +14,7 @@ export default function Signup() {
     watch,
     formState: { errors },
   } = useForm();
+ console.log(errors);
 
   return (
     <>
@@ -30,7 +31,9 @@ export default function Signup() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form noValidateclassName="space-y-6" onSubmit={handleSubmit((data)=>{
+            console.log(data)
+          })}>
             <div>
               <label
                 htmlFor="email"
@@ -41,10 +44,8 @@ export default function Signup() {
               <div className="mt-2">
                 <input
                   id="email"
-                  name="email"
+                  {...register("email",{required:"email is required"})}
                   type="email"
-                  autoComplete="email"
-                  required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -70,12 +71,12 @@ export default function Signup() {
               <div className="mt-2">
                 <input
                   id="password"
-                  name="password"
+                  {...register("password",{required:"email is required"})}
                   type="password"
-                  autoComplete="current-password"
-                  required
+                  
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
+                <p className="text-red-500">{errors.password.message}</p>
               </div>
             </div>
 
@@ -85,18 +86,21 @@ export default function Signup() {
                   htmlFor="password"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Confirm Password
+                <p className="text-red-500">{errors.confirmPasswordassword.message}</p>
                 </label>
                 <div className="text-sm"></div>
               </div>
               <div className="mt-2">
                 <input
-                  id="confirm-password"
-                  name="-confirm-password"
+                  id="confirmPassword"
+                  {...register("confirmPassword",{required:"confirm password is required"})}
                   type="password"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  
+                  className="
+                  block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
+                 <p className="text-red-500">{errors.confirmPassword.message}</p>
+
               </div>
             </div>
 

@@ -7,7 +7,6 @@ import {
   selectAllProducts,
   selectCount,
   fetchAllProductsByFilterAsync,
-  selectTotalItems,
   selectBrands,
   selectCategories,
   fetchBrandsAsync,
@@ -51,7 +50,6 @@ export default function ProductList() {
   const products = useSelector(selectAllProducts);
   const brands = useSelector(selectBrands);
   const categories= useSelector(selectCategories);
-  const totalItems = useSelector(selectTotalItems);
   const filters = [
     {
       id: "color",
@@ -150,7 +148,7 @@ export default function ProductList() {
   useEffect(()=>{
     setPage(1)
 
-  },[totalItems,sort]);
+  },[sort]);
 
   useEffect(()=>{
     dispatch(fetchBrandsAsync());
@@ -254,7 +252,7 @@ export default function ProductList() {
               </section>
 
               <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
-                <Pagination page={page} setPage={setPage} handlePage={handlePage} totalItems={totalItems}></Pagination>
+                <Pagination page={page} setPage={setPage} handlePage={handlePage} ></Pagination>
               </div>
             </main>
           </div>
