@@ -47,7 +47,8 @@ export default function Signup() {
                   {...register("email",{required:"email is required"})}
                   type="email"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
+                />              {errors.email &&  <p className="text-red-500">{errors.email.message}</p>}
+
               </div>
             </div>
 
@@ -71,12 +72,12 @@ export default function Signup() {
               <div className="mt-2">
                 <input
                   id="password"
-                  {...register("password",{required:"email is required"})}
+                  {...register("password",{required:"email is required",pattern:{value:/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b,message:'email is not valid' }})}
                   type="password"
                   
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
-                <p className="text-red-500">{errors.password.message}</p>
+               {errors.password && <p className="text-red-500">{errors.password.message}</p>}
               </div>
             </div>
 
@@ -85,15 +86,15 @@ export default function Signup() {
                 <label
                   htmlFor="password"
                   className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                <p className="text-red-500">{errors.confirmPasswordassword.message}</p>
-                </label>
+                >  Confirm Password
+               {errors.confirmPassword && <p className="text-red-500">{errors.confirmPasswordassword.message}</p>}
+               </label>
                 <div className="text-sm"></div>
               </div>
               <div className="mt-2">
                 <input
                   id="confirmPassword"
-                  {...register("confirmPassword",{required:"confirm password is required"})}
+                  {...register("confirmPassword",{required:"confirm password is required", pattern:{value:/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,message:'email is not valid',},})}
                   type="password"
                   
                   className="
