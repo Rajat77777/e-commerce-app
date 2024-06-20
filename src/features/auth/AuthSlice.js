@@ -40,6 +40,8 @@ export const counterSlice = createSlice({
   },
 });
 
+export const selectLoggedInUser =(state)=> state.auth.loggedInUser;
+
 export const { increment } = counterSlice.actions;
 
 

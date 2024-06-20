@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import { increment, incrementAsync } from "../AuthSlice";
+import { selectLoggedInUser, createUserAsync } from "../AuthSlice";
 import { Link } from "react-router-dom";
 
 export default function Signup() {
@@ -14,10 +14,12 @@ export default function Signup() {
     watch,
     formState: { errors },
   } = useForm();
+  const user =useSelector(selectLoggedInUser)
  console.log(errors);
 
   return (
     <>
+    {user.email}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -32,7 +34,8 @@ export default function Signup() {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form noValidateclassName="space-y-6" onSubmit={handleSubmit((data)=>{
-            console.log(data)
+           dispatch(createUserAsync(email:data.email,password:data.password))
+           console.log(data)
           })}>
             <div>
               <label
